@@ -5,7 +5,7 @@ from azure.identity.aio import DefaultAzureCredential
 from datetime import datetime
 
 event_hub_fqdn='eventhub553.servicebus.windows.net'
-event_hub_name='apphub'
+event_hub_name='datahub'
 
 credential=DefaultAzureCredential()
 
@@ -20,10 +20,11 @@ async def run():
     async with producer:
         event_dt_btch= await producer.create_batch()
         event_dt_btch.add(EventData(f'{datetime.now()}: first event'))
-        event_dt_btch.add(EventData(f'{datetime.now()}:second event'))
-        event_dt_btch.add(EventData(f'{datetime.now()}:third event'))
+        event_dt_btch.add(EventData(f'{datetime.now()}: second event'))
+        event_dt_btch.add(EventData(f'{datetime.now()}: third event'))
 
         await producer.send_batch(event_dt_btch)
+        print(f'events produced successfully')
 
         await credential.close()
 

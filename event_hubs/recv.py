@@ -7,12 +7,12 @@ from azure.identity.aio import DefaultAzureCredential
 blob_store='https://mystore553.blob.core.windows.net/'
 blob_container='events'
 event_hub_fqdn='eventhub553.servicebus.windows.net'
-event_hub_name='apphub'
+event_hub_name='datahub'
 
 credential=DefaultAzureCredential()
 
 async def on_event(partition_context,event):
-    print(f'received event: {event.body_as_str(encoding='utf-8')} from partition with id {partition_context.partition_id}')
+    print(f'received event: {event.body_as_str(encoding='utf-8')} from partition with id {partition_context.partition_id}, offset is : {event.offset}')
 
     await partition_context.update_checkpoint(event)
 
