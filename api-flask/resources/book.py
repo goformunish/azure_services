@@ -17,7 +17,7 @@ class BookGetResource(Resource):
         return None
     
 class BookPostResource(Resource):
-    def put(self,id):
+    def post(self):
         book=json.loads(request.data)
         new_id=max(book['id'] for book in books)+1
         book['id']=new_id
